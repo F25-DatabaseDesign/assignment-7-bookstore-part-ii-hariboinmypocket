@@ -75,4 +75,4 @@ def handle_error(e):
     return render_template('error.html', error=e) # render the edit template
 
 if __name__ == "__main__":
-    app.run(debug = True)
+    app.run(host="0.0.0.0", port=8080, debug = True)
