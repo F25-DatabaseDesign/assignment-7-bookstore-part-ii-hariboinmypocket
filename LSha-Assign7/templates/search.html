@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block container %}
+<section id="searchPage">
+  <h1>Search Results</h1>
+
+  {% if books|length == 0 %}
+    <p>No results found for "{{ term }}".</p>
+  {% else %}
+    <section id="catRight">
+      {% for book in books %}
+        <div class="book">
+          <div>
+            <a href="{{ url_for('book_detail', book_id=book['id']) }}">
+              <img src="/{{ book['image'] }}" alt="{{ book['title'] }}">
+            </a>
+
+          </div>
+
+          <div class="bookDetailBox">
+            <p class="bookTitle">{{ book['title'] }}</p>
+            <p class="bookDetail">by {{ book['author'] }}</p>
+            <p class="bookDetail">ISBN: {{ book['isbn'] }}</p>
+            <p class="bookPrice">${{ book['price'] }}</p>
+
+            <a class="actionButton" href="#">Add to cart</a>
+
+            {% if book['readNow'] == 1 %}
+              <a class="actionButton" href="#">Read Now</a>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </section>
+  {% endif %}
+</section>
+{% endblock %}
+
